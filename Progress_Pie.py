@@ -1,7 +1,16 @@
 import sys
 import math
 
+#Progress Pie:
+#Given a 2-d graph from (0,0) to (100,100) with a circle centered at (50,50) with 50 pixels radius
+#Determine if a certain point is within the progress pie after certain %
+#Input: T (Amount of iterations)
+#Input: P X Y (Progress %, X Coordinate, Y Coordinate)
+#Output: White (Not in the Progress Pie)
+#Ouput: Black (In the Progress Pie)
+
 def main():
+
     total = input("Enter the total number of queries: ")
     try:
         total = int(total)
@@ -11,6 +20,8 @@ def main():
     if total < 1 or total > 1000:
         print("Please enter a valid number (1-1000) of queries.")
         sys.exit()
+
+    
     i = 1
     while (i <= total):
         curr = input("Query #"+str(i)+": ")
@@ -28,8 +39,11 @@ def main():
         except ValueError:
             print("Enter query in the format of 3 integers between 0-100. e.g. 0 55 25")
             continue
+
+        #if distance to center is greater than radius
         if distance(x,y) > 50:
             print("Case #"+str(i)+": white")
+
         else:
             result = angle(x,y)
             progress_angle = p*360/100
@@ -40,9 +54,11 @@ def main():
 
         i += 1
 
+#Calculate the Cartesian Distance between two coordinates
 def distance(x,y):
     return math.sqrt(((x - 50) ** 2) + ((y - 50) ** 2))
 
+#Calculate the angle between a given point and the center of the circle (50,50)
 def angle(x,y):
     distance_x = x-50
     distance_y = y-50
